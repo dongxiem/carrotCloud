@@ -1,7 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"carrotCloud/handler"
+)
 
 func main() {
-	fmt.Println("test")
+	api := handler.InitRouter()
+	api.Run(":5000")
 }
