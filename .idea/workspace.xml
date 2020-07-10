@@ -6,31 +6,28 @@
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
       </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
     </expand>
     <select>
       <path>
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:origin/master" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f3dda4d9-f358-478d-986f-c1496162a5fa" name="Default Changelist" comment="The first try">
-      <change afterPath="$PROJECT_DIR$/handler/controllers/ping.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/handler/router.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/serializer/common.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+    <list default="true" id="f3dda4d9-f358-478d-986f-c1496162a5fa" name="Default Changelist" comment="Prepare for user login">
+      <change afterPath="$PROJECT_DIR$/models/user.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/user_test.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pkg/serializer/user.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pkg/util/common.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handler/controllers/main_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/handler/controllers/main_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handler/controllers/ping.go" beforeDir="false" afterPath="$PROJECT_DIR$/handler/controllers/ping.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handler/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/handler/router.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/migration.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/migration.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/serializer/common.go" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,40 +64,74 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="go.import.settings.migrated" value="true" />
     <property name="last_opened_file_path" value="$USER_HOME$" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
-  <component name="RunManager" selected="Go Build.go build main.go (1)">
-    <configuration name="go build main.go (1)" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\goProject\carrotCloud\pkg" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Go Test.TestGetUser in carrotCloud/models">
+    <configuration name="TestErrorResponse in carrotCloud/handler/controllers" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="carrotCloud" />
-      <working_directory value="$PROJECT_DIR$" />
-      <kind value="FILE" />
-      <filePath value="$PROJECT_DIR$/main.go" />
-      <package value="carrotCloud" />
-      <directory value="$PROJECT_DIR$/" />
-      <method v="2" />
-    </configuration>
-    <configuration name="go build main.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
-      <module name="carrotCloud" />
-      <working_directory value="$PROJECT_DIR$" />
+      <working_directory value="$PROJECT_DIR$/handler/controllers" />
+      <framework value="gotest" />
       <kind value="PACKAGE" />
-      <filePath value="$PROJECT_DIR$/main.go" />
-      <package value="carrotCloud" />
+      <package value="carrotCloud/handler/controllers" />
       <directory value="$PROJECT_DIR$/" />
+      <filePath value="$PROJECT_DIR$/" />
+      <pattern value="^TestErrorResponse$" />
       <method v="2" />
     </configuration>
-    <configuration name="go build router.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+    <configuration name="TestGetUser in carrotCloud/models" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="carrotCloud" />
-      <working_directory value="$PROJECT_DIR$" />
+      <working_directory value="$PROJECT_DIR$/models" />
+      <framework value="gotest" />
+      <kind value="PACKAGE" />
+      <package value="carrotCloud/models" />
+      <directory value="$PROJECT_DIR$/" />
+      <filePath value="$PROJECT_DIR$/" />
+      <pattern value="^TestGetUser$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestParamErrorMsg in carrotCloud/handler/controllers" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="carrotCloud" />
+      <working_directory value="$PROJECT_DIR$/handler/controllers" />
+      <framework value="gotest" />
+      <kind value="PACKAGE" />
+      <package value="carrotCloud/handler/controllers" />
+      <directory value="$PROJECT_DIR$/" />
+      <filePath value="$PROJECT_DIR$/" />
+      <pattern value="^TestParamErrorMsg$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main_test.go" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="carrotCloud" />
+      <working_directory value="$PROJECT_DIR$/handler/controllers" />
+      <framework value="gotest" />
       <kind value="FILE" />
-      <filePath value="$PROJECT_DIR$/handler/router.go" />
       <package value="carrotCloud" />
       <directory value="$PROJECT_DIR$/" />
+      <filePath value="$PROJECT_DIR$/handler/controllers/main_test.go" />
+      <method v="2" />
+    </configuration>
+    <configuration name="user_test.go" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="carrotCloud" />
+      <working_directory value="$PROJECT_DIR$/models" />
+      <framework value="gotest" />
+      <kind value="FILE" />
+      <package value="carrotCloud" />
+      <directory value="$PROJECT_DIR$/" />
+      <filePath value="$PROJECT_DIR$/models/user_test.go" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Go Build.go build main.go (1)" />
-        <item itemvalue="Go Build.go build router.go" />
-        <item itemvalue="Go Build.go build main.go" />
+        <item itemvalue="Go Test.TestGetUser in carrotCloud/models" />
+        <item itemvalue="Go Test.user_test.go" />
+        <item itemvalue="Go Test.TestParamErrorMsg in carrotCloud/handler/controllers" />
+        <item itemvalue="Go Test.TestErrorResponse in carrotCloud/handler/controllers" />
+        <item itemvalue="Go Test.main_test.go" />
       </list>
     </recent_temporary>
   </component>
@@ -112,19 +143,7 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="origin/master" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
+            <State />
           </value>
         </entry>
       </map>
@@ -132,7 +151,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="The first try" />
-    <option name="LAST_COMMIT_MESSAGE" value="The first try" />
+    <MESSAGE value="Add:Ping router test" />
+    <MESSAGE value="Prepare for user login" />
+    <option name="LAST_COMMIT_MESSAGE" value="Prepare for user login" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
@@ -146,25 +167,37 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="200" y="143" key="#go_build_router.go/0.0.1920.1040@0.0.1920.1040" timestamp="1594282257474" />
-    <state width="956" height="271" key="GridCell.Tab.0.bottom" timestamp="1594282519801">
+    <state width="956" height="271" key="GridCell.Tab.0.bottom" timestamp="1594362332216">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="956" height="271" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1594282519801" />
-    <state width="956" height="271" key="GridCell.Tab.0.center" timestamp="1594282519801">
+    <state width="956" height="271" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1594362332216" />
+    <state width="956" height="271" key="GridCell.Tab.0.center" timestamp="1594362332216">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="956" height="271" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1594282519801" />
-    <state width="956" height="271" key="GridCell.Tab.0.left" timestamp="1594282519801">
+    <state width="956" height="271" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1594362332216" />
+    <state width="956" height="271" key="GridCell.Tab.0.left" timestamp="1594362332215">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="956" height="271" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1594282519801" />
-    <state width="956" height="271" key="GridCell.Tab.0.right" timestamp="1594282519801">
+    <state width="956" height="271" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1594362332215" />
+    <state width="956" height="271" key="GridCell.Tab.0.right" timestamp="1594362332216">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="956" height="271" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1594282519801" />
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1594280712121">
+    <state width="956" height="271" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1594362332216" />
+    <state x="343" y="220" key="RollbackChangesDialog" timestamp="1594357924622">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1594280712121" />
+    <state x="343" y="220" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1594357924622" />
+    <state x="9" y="151" key="SettingsEditor" timestamp="1594295268305">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="9" y="151" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1594295268305" />
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1594297263020">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1594297263020" />
+    <state x="171" y="229" width="672" height="678" key="search.everywhere.popup" timestamp="1594359091722">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="171" y="229" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1594359091722" />
   </component>
 </project>
