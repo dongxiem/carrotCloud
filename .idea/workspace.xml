@@ -16,18 +16,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f3dda4d9-f358-478d-986f-c1496162a5fa" name="Default Changelist" comment="Prepare for user login">
-      <change afterPath="$PROJECT_DIR$/models/user.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/user_test.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pkg/serializer/user.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pkg/util/common.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/db.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/mysql/conn.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/user.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/handler/user.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/util/resp.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/util/util.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handler/controllers/main_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/handler/controllers/main_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handler/controllers/ping.go" beforeDir="false" afterPath="$PROJECT_DIR$/handler/controllers/ping.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handler/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/handler/router.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/migration.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/migration.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/serializer/common.go" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +58,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="go.import.settings.migrated" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../filestore-serve" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
@@ -148,12 +143,14 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="The first try" />
     <MESSAGE value="Add:Ping router test" />
     <MESSAGE value="Prepare for user login" />
-    <option name="LAST_COMMIT_MESSAGE" value="Prepare for user login" />
+    <MESSAGE value="Delete File" />
+    <option name="LAST_COMMIT_MESSAGE" value="Delete File" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
@@ -167,6 +164,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="200" y="143" key="#go_build_router.go/0.0.1920.1040@0.0.1920.1040" timestamp="1594282257474" />
+    <state x="275" y="282" key="FileChooserDialogImpl" timestamp="1594363899287">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="275" y="282" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1594363899287" />
     <state width="956" height="271" key="GridCell.Tab.0.bottom" timestamp="1594362332216">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -191,13 +192,13 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="9" y="151" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1594295268305" />
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1594297263020">
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1594362862239">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1594297263020" />
-    <state x="171" y="229" width="672" height="678" key="search.everywhere.popup" timestamp="1594359091722">
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1594362862239" />
+    <state x="171" y="229" width="672" height="678" key="search.everywhere.popup" timestamp="1594364394547">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="171" y="229" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1594359091722" />
+    <state x="171" y="229" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1594364394547" />
   </component>
 </project>
