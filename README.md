@@ -25,6 +25,7 @@
 - Mysql + Redis
 - RabbitMQ
 - Go-Micro
+- gRPC
 - Docker +K8s
 
 
