@@ -46,7 +46,7 @@ func UserSignUp(username string, passwd string) bool {
 func UserSignIn(username string, encpwd string) bool {
 
 	stmt, err := mydb.DBConn().Prepare(
-		"select * from tbl_user where user_name = ? limit 1")
+		"select * from tbl_user where user_name=? limit1")
 	if err != nil {
 		fmt.Println(err.Error())
 		return false
@@ -96,7 +96,7 @@ func UpdateToken(username string, token string) bool {
 func GetUserInfo(username string) (User, error) {
 
 	user := User{}
-
+	// 预执行出错
 	stmt, err := mydb.DBConn().Prepare(
 		"select  user_name, signup_at from tbl_user where user_name = ? limit 1")
 
@@ -113,4 +113,24 @@ func GetUserInfo(username string) (User, error) {
 		return user, err
 	}
 	return user, nil
+}
+
+// UserExist : 查询用户是否存在
+func UserExist(username string) (bool, error) {
+
+	stmt, err := mydb.DBConn().Prepare(
+		"select 1 from tbl_user where user_name = ? limit 1")
+	// 预执行出错
+	if err != nil {
+		fmt.Println(err.Error())
+		return false, err
+	}
+	defer stmt.Close()
+	// 执行数据库查询
+	rows, err := stmt.Query(username)
+	if err != nil {
+		return false, err
+	}
+	// 返回数据
+	return rows.Next(), nil
 }
