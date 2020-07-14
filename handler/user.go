@@ -1,9 +1,9 @@
 package handler
 
 import (
-	mydb "carrotCloud/db/mysql"
 	"carrotCloud/util"
 	"fmt"
+	"github.com/gin-gonic/gin"
 	"net/http"
 	"time"
 
@@ -15,22 +15,26 @@ const (
 	pwdSalt = "*#890"
 )
 
-// SignupHandler : 处理用户注册请求
-func SignupHandler(w http.ResponseWriter, r *http.Request) {
+// SignUpHandler : 处理用户注册请求
+func SignUpHandler(c *gin.Context) {
+	// 进行重定向
+	c.Redirect(http.StatusFound, "http://"+c.Request.Host+"/static/view/signup.html")
 
-	if r.Method == http.MethodGet {
-		// 进行重定向
-		http.Redirect(w, r, "/static/view/signup.html", http.StatusFound)
-		return
-	}
-	r.ParseForm()
+}
 
-	username := r.Form.Get("username")
-	passwd := r.Form.Get("password")
+// DoSignUpHandler : 处理用户注册请求
+func DoSignUpHandler(c *gin.Context) {
+	// 获取用户名字和密码
+	username := c.Request.FormValue("username")
+	passwd := c.Request.FormValue("password")
 
-	// 参数长度判断
-	if len(username) < 3 && len(passwd) < 5 {
-		w.Write([]byte("Invalid parameter"))
+	// 参数长度判断，进行校验
+	if len(username) < 3 || len(passwd) < 5 {
+		// 直接填入JSON数据并且返回
+		c.JSON(http.StatusOK,
+			gin.H{
+				"msg": "Invalid parameter",
+			})
 		return
 	}
 
@@ -39,40 +43,61 @@ func SignupHandler(w http.ResponseWriter, r *http.Request) {
 	// 将用户信息注册到用户表中
 	suc := dblayer.UserSignUp(username, encPasswd)
 	if suc {
-		w.Write([]byte("SUCCESS"))
+		c.JSON(http.StatusOK,
+			gin.H{
+				"code":    0,
+				"msg":     "注册成功",
+				"data":    nil,
+				"forward": "/user/signin",
+			})
 	} else {
-		w.Write([]byte("Failed"))
+		c.JSON(http.StatusOK,
+			gin.H{
+				"code": 0,
+				"msg":  "注册失败",
+				"data": nil,
+			})
 	}
 }
 
-// SignInHandler : 登录接口
-func SignInHandler(w http.ResponseWriter, r *http.Request) {
-	if r.Method == http.MethodGet {
-		http.Redirect(w, r, "/static/view/signin.html", http.StatusFound)
-		return
-	}
+// SignInHandler : 处理用户登录请求
+func SignInHandler(c *gin.Context) {
+	// 进行重定向
+	c.Redirect(http.StatusFound, "http://"+c.Request.Host+"/static/view/signin.html")
+}
 
-	r.ParseForm()
-	username := r.Form.Get("username")
-	password := r.Form.Get("password")
+// DoSignInHandler : 登录接口
+func DoSignInHandler(c *gin.Context) {
+	username := c.Request.FormValue("username")
+	password := c.Request.FormValue("password")
 
 	encPasswd := util.Sha1([]byte(password + pwdSalt))
 
 	// 1.校验用户名及密码
 	pwdChecked := dblayer.UserSignIn(username, encPasswd)
 	if !pwdChecked {
-		w.Write([]byte("FAILED"))
+		// 写入JSON，验证失败
+		c.JSON(http.StatusOK,
+			gin.H{
+				"code": 0,
+				"msg":  "密码校验失败",
+				"data": nil,
+			})
 		return
 	}
-
 	// 2.生成访问凭证(token)
 	token := GenToken(username)
 	upRes := dblayer.UpdateToken(username, token)
 	if !upRes {
-		w.Write([]byte("FAILED"))
+		// 写入JSON，登录失败信息
+		c.JSON(http.StatusOK,
+			gin.H{
+				"code": 0,
+				"msg":  "登录失败",
+				"data": nil,
+			})
 		return
 	}
-
 	// 3.登录成功之后重定向到首页
 	resp := util.RespMsg{
 		Code: 0,
@@ -82,22 +107,26 @@ func SignInHandler(w http.ResponseWriter, r *http.Request) {
 			Username string
 			Token    string
 		}{
-			Location: "http://" + r.Host + "/static/view/home.html",
+			// 这里的c.Request.Host 挺好用
+			Location: "http://" + c.Request.Host + "/static/view/home.html",
 			Username: username,
 			Token:    token,
 		},
 	}
-	w.Write(resp.JSONBytes())
+	// 写入数据
+	c.Data(http.StatusOK, "octet-stream", resp.JSONBytes())
 }
 
-func UserInfoHandler(w http.ResponseWriter, r http.Request) {
+// UserInfoHandler ： 查询用户信息
+func UserInfoHandler(c *gin.Context) {
 	// 1.解析参数请求
-	username := r.Form.Get("username")
+	username := c.Request.FormValue("username")
 
-	// 2.查询用户信息，并得到user
+	// 2.查询用户信息
 	user, err := dblayer.GetUserInfo(username)
 	if err != nil {
-		w.WriteHeader(http.StatusForbidden)
+		c.JSON(http.StatusForbidden,
+			gin.H{})
 		return
 	}
 
@@ -107,7 +136,8 @@ func UserInfoHandler(w http.ResponseWriter, r http.Request) {
 		Msg:  "OK",
 		Data: user,
 	}
-	w.Write(resp.JSONBytes())
+	// 写入数据
+	c.Data(http.StatusOK, "octet-stream", resp.JSONBytes())
 }
 
 // GenToken ： 生成token
@@ -127,4 +157,27 @@ func IsTokenValid(token string) bool {
 	// TODO: 从数据库表tbl_user_token查询username对应的token信息
 	// TODO: 对比两个token是否一致
 	return true
+}
+
+// UserExistsHandler : 查询用户是否存在
+func UserExistsHandler(c *gin.Context) {
+
+	// 1.解析请求参数
+	username := c.Request.FormValue("username")
+
+	// 2.查询用户信息
+	exists, err := dblayer.UserExist(username)
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError,
+			gin.H{
+				"msg": "server error",
+			})
+	} else {
+		c.JSON(http.StatusOK,
+			gin.H{
+				"msg":    "ok",
+				"exists": exists,
+			})
+	}
 }
