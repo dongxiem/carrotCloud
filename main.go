@@ -1,14 +1,14 @@
 package main
 
 import (
-	"carrotCloud/rout"
 	"carrotCloud/config"
+	"carrotCloud/route"
 	"fmt"
 )
 
 func main() {
 	// 路由设置
-	router := rout.Router()
+	router := route.Router()
 
 	// 启动服务并且监听接口
 	err := router.Run(config.UploadServiceHost)
@@ -16,6 +16,4 @@ func main() {
 		fmt.Printf("Failed to start server, err:%s\n", err.Error())
 	}
 
-
 }
-
