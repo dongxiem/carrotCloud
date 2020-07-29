@@ -25,6 +25,31 @@ func Router() *gin.Engine {
 	// 加入auth认证中间件
 	router.Use(midware.Authorize())
 
+	// 文件存取接口
+	router.GET("/file/upload", hdl.UploadHandler)
+	router.POST("/file/upload", hdl.DoUploadHandler)
+	router.GET("/file/upload/suc", hdl.UploadSucHandler)
+	router.GET("/file/meta", hdl.GetFileMetaHandler)
+	router.POST("/file/query", hdl.FileQueryHandler)
+	router.GET("/file/download", hdl.DownloadHandler)
+	router.POST("/file/download", hdl.DownloadHandler)
+	router.POST("/file/update", hdl.FileMetaUpdateHandler)
+	router.POST("/file/delete", hdl.FileDeleteHandler)
+	router.POST("/file/downloadurl",
+		hdl.DownloadURLHandler)
+
+	// 秒传接口
+	router.POST("/file/fastupload",
+		hdl.TryFastUploadHandler)
+
+	// 分块上传接口
+	router.POST("/file/mpupload/init",
+		hdl.InitialMultipartUploadHandler)
+	router.POST("/file/mpupload/uppart",
+		hdl.UploadPartHandler)
+	router.POST("/file/mpupload/complete",
+		hdl.CompleteUploadHandler)
+
 	// 用户相关接口
 	router.POST("/user/info", hdl.UserInfoHandler)
 
