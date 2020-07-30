@@ -21,15 +21,16 @@ func OnUserFileUploadFinished(userName, fileHash, fileName string, fileSize int6
 
 	// 语句预执行将数据插入表中
 	stmt, err := mydb.DBConn().Prepare(
-		"insert  ignore into tbl_user_tile(`user_name`, `file_sha`, `file_name`," +
-			"`file_size`, `upload_at`) values (?,?,?,?,?)")
+		"insert ignore into tbl_user_file (`user_name`,`file_sha1`,`file_name`," +
+			"`file_size`,`upload_at`) values (?,?,?,?,?)")
 	if err != nil {
 		return false
 	}
 
 	defer stmt.Close()
+
 	// 将传入的参数进行上面准备语句的执行
-	_, err = stmt.Exec(userName, fileHash, fileName, fileHash, time.Now())
+	_, err = stmt.Exec(userName, fileHash, fileName, fileSize, time.Now())
 	if err != nil {
 		return false
 	}
@@ -40,8 +41,9 @@ func OnUserFileUploadFinished(userName, fileHash, fileName string, fileSize int6
 func QueryUserFileMetas(userName string, limit int) ([]UserFile, error) {
 
 	stmt, err := mydb.DBConn().Prepare(
-		"select file_sha1, file_name, file_size, uploat_at," +
-			"last_update from tbl_user_file where user_name = ? limit ?")
+		"select file_sha1,file_name,file_size,upload_at," +
+			"last_update from tbl_user_file where user_name=? limit ?")
+
 	if err != nil {
 		// 如果发生错误，则返回该错误
 		return nil, err
@@ -52,7 +54,6 @@ func QueryUserFileMetas(userName string, limit int) ([]UserFile, error) {
 		return nil, err
 	}
 
-	defer stmt.Close()
 	// 定义一个UserFile的用以接受返回的用户信息
 	var userFiles []UserFile
 
@@ -72,4 +73,31 @@ func QueryUserFileMetas(userName string, limit int) ([]UserFile, error) {
 	}
 	// 最后返回该切片，并且error为nil
 	return userFiles, nil
+}
+
+// QueryUserFileMeta : 获取用户单个文件信息
+func QueryUserFileMeta(username string, filehash string) (*UserFile, error) {
+	stmt, err := mydb.DBConn().Prepare(
+		"select file_sha1,file_name,file_size,upload_at," +
+			"last_update from tbl_user_file where user_name=? and file_sha1=?  limit 1")
+	if err != nil {
+		return nil, err
+	}
+	defer stmt.Close()
+
+	rows, err := stmt.Query(username, filehash)
+	if err != nil {
+		return nil, err
+	}
+
+	ufile := UserFile{}
+	if rows.Next() {
+		err = rows.Scan(&ufile.FileHash, &ufile.FileName, &ufile.FileSize,
+			&ufile.UploadAt, &ufile.LastUpdated)
+		if err != nil {
+			fmt.Println(err.Error())
+			return nil, err
+		}
+	}
+	return &ufile, nil
 }
