@@ -32,11 +32,9 @@ func Router() *gin.Engine {
 	router.GET("/file/meta", hdl.GetFileMetaHandler)
 	router.POST("/file/query", hdl.FileQueryHandler)
 	router.GET("/file/download", hdl.DownloadHandler)
-	router.POST("/file/download", hdl.DownloadHandler)
 	router.POST("/file/update", hdl.FileMetaUpdateHandler)
 	router.POST("/file/delete", hdl.FileDeleteHandler)
-	router.POST("/file/downloadurl",
-		hdl.DownloadURLHandler)
+	router.POST("/file/downloadurl", hdl.DownloadURLHandler)
 
 	// 秒传接口
 	router.POST("/file/fastupload",
