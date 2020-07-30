@@ -45,8 +45,8 @@ func UserSignUp(username string, passwd string) bool {
 // UserSignIn : 判断用户密码是否一致
 func UserSignIn(username string, encpwd string) bool {
 
-	stmt, err := mydb.DBConn().Prepare(
-		"select * from tbl_user where user_name=? limit1")
+	stmt, err := mydb.DBConn().Prepare("select * from tbl_user where user_name=? limit 1")
+
 	if err != nil {
 		fmt.Println(err.Error())
 		return false
@@ -96,9 +96,9 @@ func UpdateToken(username string, token string) bool {
 func GetUserInfo(username string) (User, error) {
 
 	user := User{}
-	// 预执行出错
+
 	stmt, err := mydb.DBConn().Prepare(
-		"select  user_name, signup_at from tbl_user where user_name = ? limit 1")
+		"select user_name,signup_at from tbl_user where user_name=? limit 1")
 
 	if err != nil {
 		fmt.Println(err.Error())
