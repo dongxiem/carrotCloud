@@ -18,7 +18,7 @@ type TableFile struct {
 func GetFileMeta(fileHash string) (*TableFile, error) {
 
 	stmt, err := mydb.DBConn().Prepare(
-		"select file_sha1, file_addr, file_name, file_size from tbl_file" +
+		"select file_sha1,file_addr,file_name,file_size from tbl_file " +
 			"where file_sha1=? and status=1 limit 1")
 	if err != nil {
 		fmt.Println(err.Error())
@@ -87,8 +87,8 @@ func GetFileMetaList(limit int) ([]TableFile, error) {
 func OnFileUploadFinished(fileHash, fileName string, fileSize int64, fileAddr string) bool {
 	// Mysql语句欲写入，注意status为1
 	stmt, err := mydb.DBConn().Prepare(
-		"insert ignore into table_file (`file_sha1`, `file_name`, `file_size`," +
-			"`file_add`, `status`) values(?,?,?,?,1)")
+		"insert ignore into tbl_file (`file_sha1`, `file_name`, `file_size`," +
+			"`file_addr`, `status`) values(?,?,?,?,1)")
 	// 错误处理
 	if err != nil {
 		fmt.Println("Failed to prepare statement, err:" + err.Error())
