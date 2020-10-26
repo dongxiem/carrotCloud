@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"carrotCloud/cache/conn"
 	"fmt"
 	"math"
 	"net/http"
@@ -14,7 +15,6 @@ import (
 
 	"github.com/garyburd/redigo/redis"
 
-	rPool "carrotCloud/cache"
 	dblayer "carrotCloud/db"
 )
 
@@ -44,7 +44,7 @@ func InitialMultipartUploadHandler(c *gin.Context) {
 	}
 
 	// 2. 获得redis的一个连接
-	rConn := rPool.RedisPool().Get()
+	rConn := conn.RedisPool().Get()
 	defer rConn.Close()
 
 	// 3. 生成分块上传的初始化信息
@@ -79,7 +79,7 @@ func UploadPartHandler(c *gin.Context) {
 	chunkIndex := c.Request.FormValue("index")
 
 	// 2. 获得redis连接池中的一个连接
-	rConn := rPool.RedisPool().Get()
+	rConn := conn.RedisPool().Get()
 	defer rConn.Close()
 
 	// 3. 获得文件句柄，用于存储分块内容
@@ -130,7 +130,7 @@ func CompleteUploadHandler(c *gin.Context) {
 	filename := c.Request.FormValue("filename")
 
 	// 2. 获得redis连接池中的一个连接
-	rConn := rPool.RedisPool().Get()
+	rConn := conn.RedisPool().Get()
 	defer rConn.Close()
 
 	// 3. 通过uploadid查询redis并判断是否所有分块上传完成

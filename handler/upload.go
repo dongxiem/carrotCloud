@@ -19,7 +19,6 @@ import (
 	cfg "carrotCloud/config"
 	dblayer "carrotCloud/db"
 	"carrotCloud/meta"
-	"carrotCloud/store/ceph"
 	"carrotCloud/store/oss"
 	"carrotCloud/util"
 )
@@ -89,15 +88,9 @@ func DoUploadHandler(c *gin.Context) {
 		return
 	}
 
-	// 5. 同步或异步将文件转移到Ceph/OSS
+	// 5. 同步或异步将文件转移到OSS
 	newFile.Seek(0, 0) // 游标重新回到文件头部
-	if cfg.CurrentStoreType == cmn.StoreCeph {
-		// 文件写入Ceph存储
-		data, _ := ioutil.ReadAll(newFile)
-		cephPath := "/ceph/" + fileMeta.FileSha1
-		_ = ceph.PutObject("userfile", cephPath, data)
-		fileMeta.Location = cephPath
-	} else if cfg.CurrentStoreType == cmn.StoreOSS {
+	if cfg.CurrentStoreType == cmn.StoreOSS {
 		// 文件写入OSS存储
 		ossPath := "oss/" + fileMeta.FileSha1
 		// 判断写入OSS为同步还是异步
@@ -227,13 +220,6 @@ func DownloadHandler(c *gin.Context) {
 	if strings.HasPrefix(fm.Location, cfg.TempLocalRootDir) {
 		// 本地文件， 直接下载
 		c.FileAttachment(fm.Location, userFile.FileName)
-	} else if strings.HasPrefix(fm.Location, cfg.CephRootDir) {
-		// ceph中的文件，通过ceph api先下载
-		bucket := ceph.GetCephBucket("userfile")
-		data, _ := bucket.Get(fm.Location)
-		//	c.Header("content-type", "application/octect-stream")
-		c.Header("content-disposition", "attachment; filename=\""+userFile.FileName+"\"")
-		c.Data(http.StatusOK, "application/octect-stream", data)
 	}
 }
 
@@ -335,14 +321,7 @@ func DownloadURLHandler(c *gin.Context) {
 		return
 	}
 	// 判断文件存在本地还是oss
-	if strings.HasPrefix(tFile.FileAddr.String, cfg.TempLocalRootDir) ||
-		strings.HasPrefix(tFile.FileAddr.String, cfg.CephRootDir) {
-		username := c.Request.FormValue("username")
-		token := c.Request.FormValue("token")
-		tmpURL := fmt.Sprintf("http://%s/file/download?filehash=%s&username=%s&token=%s",
-			c.Request.Host, fileHash, username, token)
-		c.Data(http.StatusOK, "octet-stream", []byte(tmpURL))
-	} else if strings.HasPrefix(tFile.FileAddr.String, "oss/") {
+	if strings.HasPrefix(tFile.FileAddr.String, "oss/") {
 		// oss下载url
 		signedURL := oss.DownloadURL(tFile.FileAddr.String)
 		fmt.Println(tFile.FileAddr.String)

@@ -56,7 +56,6 @@ func GetFileMetaDB(fileSha1 string) (*FileMeta, error) {
 
 // GetLastFileMetas : 批量获取文件的元信息列表（按照注册时间排序的钱count个）
 func GetLastFileMetas(count int) []FileMeta {
-
 	// 创建一个FileMeta的数组，大小为已存在的所有fileMeta的总和（即当前最大）
 	fMetaArray := make([]FileMeta, len(fileMetas))
 	// 全部装入该数组

@@ -7,10 +7,12 @@ import (
 	"github.com/aliyun/aliyun-oss-go-sdk/oss"
 )
 
+// 全局变量
 var ossCli *oss.Client
 
 // Client : 创建oss client对象
 func Client() *oss.Client {
+	// 如果已经创建了则直接返回
 	if ossCli != nil {
 		return ossCli
 	}
