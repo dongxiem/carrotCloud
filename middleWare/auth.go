@@ -9,7 +9,6 @@ import (
 
 // Authorize : 权鉴功能-HTTP拦截器
 func Authorize() gin.HandlerFunc {
-
 	return func(c *gin.Context) {
 		username := c.Request.FormValue("username") // 用户名
 		token := c.Request.FormValue("token")       // 访问令牌
