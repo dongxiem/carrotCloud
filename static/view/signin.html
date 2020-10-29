@@ -12,9 +12,7 @@
 
   <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
-    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-    crossorigin="anonymous"></script>
-  <script lang="javascript">
+    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
   </script>
 </head>
 
@@ -44,7 +42,7 @@
               <label for="password" class="l"> 密码:</label>
             </td>
             <td>
-              <input id="password" type="text" style="height:30px;width:250px;padding-right:50px;">
+              <input id="password" type="password" style="height:30px;width:250px;padding-right:50px;">
             </td>
           </tr>
           <tr>
@@ -72,19 +70,21 @@
     $.ajax({
       url: "/user/signin",
       type: "POST",
-      data: { "username": username.value, "password": password.value },
-      error: function (jqXHR, textStatus, errorThrown) {
-        if (textStatus == "error") {
-          alert(textStatus + " : " + errorThrown);
-        } else {
-          alert(textStatus);
-        }
+      data: {
+        "username": username.value,
+        "password": password.value
       },
-      success: function (body, textStatus, jqXHR) {
-        var resp = JSON.parse(body);
-        localStorage.setItem("token", resp.data.Token)
-        localStorage.setItem("username", resp.data.Username)
-        window.location.href = resp.data.Location;
+      error: function (err) {
+        alert(err);
+      },
+      success: function (body) {
+        localStorage.setItem("token", body.data.Token)
+        localStorage.setItem("username", body.data.Username)
+        // 增加上传入口ip:port
+        localStorage.setItem("uploadEntry", body.data.UploadEntry);
+        // 增加下载入口ip:port
+        localStorage.setItem("downloadEntry", body.data.DownloadEntry);
+        window.location.href = body.data.Location;
       }
     });
   }
