@@ -13,7 +13,7 @@
 - [x] :loop:文件分块上传/断点续传
 - [x] :card_index:使用Redis缓存文件分块​上传元信息
 - [x] :cloud:支持本机、Ceph、阿里云 OSS、腾讯云 COS、七牛云作为存储端
-- [ ] :rocket:RabbitMQ实现异步任务队列
+- [x] :rocket:RabbitMQ实现异步任务队列
 - [ ] :wrench:go-micro实现微服务化
 - [ ]  :fuelpump:Docker+K8s实现持续集成
 
